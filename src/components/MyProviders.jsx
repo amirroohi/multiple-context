@@ -1,18 +1,10 @@
-import { useState } from "react";
-import { ThemeContext, CurrentUserContext } from "../App";
+import { ThemeProvider } from "../context/ThemeContext";
+import { UserProvider } from "../context/UserContext";
 
-export default function MyProviders({ children, theme, setTheme }) {
-  const [currentUser, setCurrentUser] = useState(null);
+export default function MyProviders({ children }) {
   return (
-    <ThemeContext.Provider value={theme}>
-      <CurrentUserContext.Provider
-        value={{
-          currentUser,
-          setCurrentUser,
-        }}
-      >
-        {children}
-      </CurrentUserContext.Provider>
-    </ThemeContext.Provider>
+    <UserProvider>
+      <ThemeProvider>{children}</ThemeProvider>
+    </UserProvider>
   );
 }
